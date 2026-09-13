@@ -1,12 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-
-
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -17,7 +8,7 @@ datasource db {
 }
 
 model Therapist {
-  id         String   @id @default(cuid())
+  id         String    @id @default(cuid())
   name       String
   specialty  String
   experience String?
@@ -25,8 +16,8 @@ model Therapist {
 }
 
 model Booking {
-  id              String   @id @default(cuid())
-  ref             String   @unique
+  id              String     @id @default(cuid())
+  ref             String     @unique
   patientName     String
   email           String
   phone           String
@@ -34,12 +25,12 @@ model Booking {
   painPoint       String
   appointmentType String
   therapistId     String?
-  therapist       Therapist? @relation(fields: [therapistId], references: [id])
   date            String
   time            String
   notes           String?
-  status          String   @default("Pending")
-  createdAt       DateTime @default(now())
+  status          String     @default("Pending")
+  createdAt       DateTime   @default(now())
+  therapist       Therapist? @relation(fields: [therapistId], references: [id])
 
   @@unique([therapistId, date, time])
 }
